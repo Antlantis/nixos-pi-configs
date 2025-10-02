@@ -92,6 +92,7 @@ boot.blacklistedKernelModules = [
     netcat-gnu
     iw
     hostapd-mana
+    minicom
 
     # Additional system tools
     iotop
