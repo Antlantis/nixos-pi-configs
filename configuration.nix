@@ -23,18 +23,9 @@ in
       ./modules/kismet.nix
     ];
 
-  # Bootloader: Raspberry Pi firmware + U-Boot
+  # Use extlinux bootloader (correct for Raspberry Pi)
   boot.loader.grub.enable = false;
-  boot.loader.generic-extlinux-compatible.enable = lib.mkForce false;
-
-  boot.loader.raspberryPi = {
-  enable = true;
-  uboot.enable = true;  # good default for Pi 3/4/5
-  firmwareConfig = ''
-    dtoverlay=disable-wifi
-    dtoverlay=disable-bt
-  '';
-};
+  boot.loader.generic-extlinux-compatible.enable = true;
 
   # Set wireless regulatory domain for proper WiFi channel access
   boot.kernelParams = [ "cfg80211.ieee80211_regdom=US" ];
