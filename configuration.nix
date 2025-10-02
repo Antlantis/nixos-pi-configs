@@ -74,6 +74,8 @@ boot.blacklistedKernelModules = [
     vim
     htop
     tmux
+    wpa_supplicant
+
     # Discovery service dependencies
     python3
     python3Packages.requests
