@@ -23,9 +23,18 @@ in
       ./modules/kismet.nix
     ];
 
-  # Use extlinux bootloader (correct for Raspberry Pi)
+  # Bootloader: Raspberry Pi firmware + U-Boot
   boot.loader.grub.enable = false;
-  boot.loader.generic-extlinux-compatible.enable = true;
+  boot.loader.generic-extlinux-compatible.enable = lib.mkForce false;
+
+  boot.loader.raspberryPi = {
+  enable = true;
+  uboot.enable = true;  # good default for Pi 3/4/5
+  firmwareConfig = ''
+    dtoverlay=disable-wifi
+    dtoverlay=disable-bt
+  '';
+};
 
   # Set wireless regulatory domain for proper WiFi channel access
   boot.kernelParams = [ "cfg80211.ieee80211_regdom=US" ];
@@ -82,9 +91,8 @@ in
     nmap
     iftop
     netcat-gnu
-
-    # GPS support
-    gpsd
+    iw
+    hostapd-mana
 
     # Additional system tools
     iotop
