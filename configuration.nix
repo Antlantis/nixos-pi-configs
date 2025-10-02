@@ -26,11 +26,6 @@ in
   # Use extlinux bootloader (correct for Raspberry Pi)
   boot.loader.grub.enable = false;
   boot.loader.generic-extlinux-compatible.enable = true;
- 
-
-  # Optional: keep the Bluetooth userspace off (doesn't affect USB dongles if drivers are allowed)
-  hardware.bluetooth.enable = false;
-  hardware.wifi.enable = false;
 
   # Set wireless regulatory domain for proper WiFi channel access
   boot.kernelParams = [ "cfg80211.ieee80211_regdom=US" ];
