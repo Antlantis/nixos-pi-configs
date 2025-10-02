@@ -26,6 +26,20 @@ in
   # Use extlinux bootloader (correct for Raspberry Pi)
   boot.loader.grub.enable = false;
   boot.loader.generic-extlinux-compatible.enable = true;
+ 
+  # Don’t load the Raspberry Pi onboard Wi-Fi + BT kernel drivers
+  boot.blacklistedKernelModules = [
+    "brcmfmac"   # onboard Wi-Fi
+    "brcmutil"   # helper for brcmfmac
+    "hci_uart"   # onboard BT (UART-attached)
+    "btbcm"      # Broadcom BT firmware loader (onboard)
+  ];
+
+  # Optional: keep the Bluetooth userspace off (doesn't affect USB dongles if drivers are allowed)
+  hardware.bluetooth.enable = false;
+
+  # (Leave NetworkManager on if you use USB/PCIe NICs)
+  networking.networkmanager.enable = true;
 
   # Set wireless regulatory domain for proper WiFi channel access
   boot.kernelParams = [ "cfg80211.ieee80211_regdom=US" ];
